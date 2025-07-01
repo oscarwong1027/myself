@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wong Wai Kuen - Oscar - Personal Portfolio</title>
+  <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+      
+      body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          line-height: 1.6;
+          color: #454d66;
+          overflow-x: hidden;
+      }
+      
+      /* Navigation */
+      nav {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          background: rgba(239, 238, 180, 0.95);
+          backdrop-filter: blur(10px);
+          z-index: 1000;
+          padding: 1rem 0;
+          box-shadow: 0 2px 20px rgba(69, 77, 102, 0.1);
+      }
+      
+      nav ul {
+          display: flex;
+          justify-content: center;
+          list-style: none;
+          gap: 2rem;
+          flex-wrap: wrap;
+      }
+      
+      nav a {
+          text-decoration: none;
+          color: #454d66;
+          font-weight: 500;
+          transition: color 0.3s ease;
+      }
+      
+      nav a:hover {
+          color: #309975;
+      }
+
+      /* Mobile Navigation Toggle */
+      .nav-toggle {
+          display: none;
+          flex-direction: column;
+          cursor: pointer;
+          padding: 0.5rem;
+          position: absolute;
+          right: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+      }
+
+      .nav-toggle span {
+          width: 25px;
+          height: 3px;
+          background: #454d66;
+          margin: 3px 0;
+          transition: 0.3s;
+          border-radius: 2px;
+      }
+
+      .nav-toggle.active span:nth-child(1) {
+          transform: rotate(-45deg) translate(-5px, 6px);
+      }
+
+      .nav-toggle.active span:nth-child(2) {
+          opacity: 0;
+      }
+
+      .nav-toggle.active span:nth-child(3) {
+          transform: rotate(45deg) translate(-5px, -6px);
+      }
+      
+      /* Hero Section */
+      .hero {
+          min-height: 100vh;
+          background: linear-gradient(135deg, rgba(232, 238, 236, 0.8) 0%, rgba(213, 223, 215, 0.8) 100%), url('./M-00655.jpg');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          color: #efeeb4;
+          position: relative;
+          padding: 8rem 2rem 4rem;
+      }
+      
+      .hero::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(69, 77, 102, 0.4);
+      }
+      
+      .hero-content {
+          z-index: 1;
+          animation: fadeInUp 1s ease-out;
+          max-width: 1200px;
+          width: 100%;
+      }
+      
+      .hero-main {
+          margin-bottom: 4rem;
+      }
+      
+      .hero h1 {
+          font-size: 3.5rem;
+          margin-bottom: 1rem;
+          font-weight: 700;
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      }
+      
+      .hero-main p {
+          font-size: 1.3rem;
+          margin-bottom: 2rem;
+          opacity: 0.9;
+          text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      }
+      
+      .cta-buttons {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-bottom: 4rem;
+      }
+      
+      .cta-button {
+          display: inline-block;
+          padding: 1rem 2rem;
+          background: rgba(218, 216, 115, 0.7);
+          color: #454d66;
+          text-decoration: none;
+          border-radius: 50px;
+          border: 2px solid rgba(218, 216, 115, 0.9);
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+          font-weight: 600;
+      }
+      
+      .cta-button:hover {
+          background: rgba(218, 216, 115, 0.9);
+          transform: translateY(-2px);
+          color: #309975;
+          border-color: #309975;
+      }
+      
+      .cta-button.secondary {
+          background: rgba(48, 153, 117, 0.7);
+          color: #efeeb4;
+          border-color: rgba(48, 153, 117, 0.9);
+      }
+      
+      .cta-button.secondary:hover {
+          background: rgba(48, 153, 117, 0.9);
+          color: #dad873;
+          border-color: #dad873;
+      }
+      
+      /* Productivity Tools in Hero */
+      .hero-tools {
+          background: rgba(239, 238, 180, 0.1);
+          backdrop-filter: blur(15px);
+          border: 1px solid rgba(239, 238, 180, 0.2);
+          border-radius: 20px;
+          padding: 2rem;
+          margin-top: 2rem;
+          animation: fadeInUp 1s ease-out 0.3s both;
+      }
+      
+      .hero-tools h3 {
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+          color: #efeeb4;
+          text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      }
+      
+      .hero-tools p {
+          font-size: 1rem;
+          margin-bottom: 1.5rem;
+          opacity: 0.9;
+          color: #efeeb4;
+      }
+      
+      .tools-link {
+          display: inline-block;
+          padding: 0.8rem 1.5rem;
+          background: rgba(48, 153, 117, 0.7);
+          color: #efeeb4;
+          text-decoration: none;
+          border-radius: 30px;
+          border: 2px solid rgba(48, 153, 117, 0.9);
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+          font-size: 1rem;
+          font-weight: 500;
+      }
+      
+      .tools-link:hover {
+          background: rgba(48, 153, 117, 0.9);
+          color: #dad873;
+          border-color: #dad873;
+          transform: translateY(-2px);
+      }
+      
+      /* Sections */
+      section {
+          padding: 5rem 2rem;
+          max-width: 1200px;
+          margin: 0 auto;
+      }
+      
+      h2 {
+          font-size: 2.5rem;
+          margin-bottom: 3rem;
+          text-align: center;
+          color: #454d66;
+          position: relative;
+      }
+      
+      h2::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60px;
+          height: 4px;
+          background: linear-gradient(90deg, #309975, #58b368);
+          border-radius: 2px;
+      }
+      
+      /* About Section */
+      .about-content {
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+          gap: 3rem;
+          align-items: center;
+      }
+      
+      .profile-image {
+          width: 300px;
+          height: 300px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #309975 0%, #58b368 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 4rem;
+          color: #efeeb4;
+          margin: 0 auto;
+          box-shadow: 0 20px 40px rgba(69, 77, 102, 0.1);
+      }
+      
+      .about-text {
+          font-size: 1.1rem;
+          color: #454d66;
+      }
+      
+      /* Experience Section */
+      .experience {
+          background: #efeeb4;
+      }
+      
+      .timeline {
+          position: relative;
+          max-width: 800px;
+          margin: 0 auto;
+      }
+      
+      .timeline::before {
+          content: '';
+          position: absolute;
+          left: 50%;
+          top: 0;
+          bottom: 0;
+          width: 2px;
+          background: linear-gradient(180deg, #309975, #58b368);
+          transform: translateX(-50%);
+      }
+      
+      .timeline-item {
+          position: relative;
+          margin: 2rem 0;
+          padding: 2rem;
+          background: #dad873;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(69, 77, 102, 0.1);
+          width: 45%;
+          animation: fadeInUp 0.6s ease-out;
+          color: #454d66;
+      }
+      
+      .timeline-item:nth-child(odd) {
+          left: 0;
+      }
+      
+      .timeline-item:nth-child(even) {
+          left: 55%;
+      }
+      
+      .timeline-item::before {
+          content: '';
+          position: absolute;
+          top: 30px;
+          width: 20px;
+          height: 20px;
+          background: #309975;
+          border-radius: 50%;
+          border: 4px solid #efeeb4;
+          box-shadow: 0 0 0 4px #309975;
+      }
+      
+      .timeline-item:nth-child(odd)::before {
+          right: -60px;
+      }
+      
+      .timeline-item:nth-child(even)::before {
+          left: -60px;
+      }
+      
+      .job-title {
+          font-size: 1.3rem;
+          font-weight: 600;
+          color: #454d66;
+          margin-bottom: 0.5rem;
+      }
+      
+      .company {
+          color: #309975;
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+      }
+      
+      .duration {
+          color: #454d66;
+          font-size: 0.9rem;
+          margin-bottom: 1rem;
+          opacity: 0.8;
+      }
+
+      /* Education Section */
+      .education {
+          background: #dad873;
+          padding: 3rem 2rem 5rem;
+          max-width: 800px;
+          margin: 5rem auto 5rem;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(48, 153, 117, 0.1);
+          color: #454d66;
+      }
+
+      .education-item {
+          margin-bottom: 2rem;
+      }
+
+      .degree {
+          font-weight: 600;
+          font-size: 1.2rem;
+          color: #454d66;
+      }
+
+      .school {
+          color: #309975;
+          font-weight: 500;
+          margin-bottom: 0.3rem;
+      }
+
+      /* Certification Section */
+      .certifications {
+          max-width: 800px;
+          margin: 0 auto 5rem;
+          padding: 3rem 2rem 5rem;
+          background: #efeeb4;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(69, 77, 102, 0.05);
+          color: #454d66;
+      }
+
+      .cert-list {
+          list-style-type: disc;
+          padding-left: 1.5rem;
+          color: #454d66;
+          font-size: 1.1rem;
+          line-height: 1.6;
+      }
+
+      /* Skills Section */
+      .skills-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+          margin-top: 2rem;
+      }
+
+      .skill-card {
+          background: #dad873;
+          padding: 2rem;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(69, 77, 102, 0.1);
+          text-align: center;
+          transition: transform 0.3s ease;
+          font-size: 1.1rem;
+          color: #454d66;
+      }
+
+      .skill-card:hover {
+          transform: translateY(-10px);
+          background: #58b368;
+          color: #efeeb4;
+      }
+
+      .skill-icon {
+          font-size: 2.5rem;
+          margin-bottom: 1rem;
+          color: #309975;
+      }
+
+      .skill-card:hover .skill-icon {
+          color: #efeeb4;
+      }
+
+      /* Life Section */
+      .life {
+          background: linear-gradient(135deg, #454d66 0%, #309975 100%);
+          color: #efeeb4;
+      }
+      
+      .life h2 {
+          color: #efeeb4;
+      }
+      
+      .life h2::after {
+          background: rgba(239, 238, 180, 0.5);
+      }
+      
+      .hobbies-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 2rem;
+          margin-top: 2rem;
+      }
+      
+      .hobby-card {
+          background: rgba(239, 238, 180, 0.15);
+          padding: 2rem;
+          border-radius: 15px;
+          text-align: center;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(239, 238, 180, 0.3);
+          color: #efeeb4;
+      }
+      
+      .hobby-icon {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+          color: #58b368;
+      }
+      
+      /* Contact Section */
+      .contact {
+          text-align: center;
+          color: #454d66;
+      }
+      
+      .contact-links {
+          display: flex;
+          justify-content: center;
+          gap: 2rem;
+          margin-top: 2rem;
+          flex-wrap: wrap;
+      }
+      
+      .contact-link {
+          display: inline-block;
+          padding: 1rem 2rem;
+          background: linear-gradient(135deg, #309975, #58b368);
+          color: #efeeb4;
+          text-decoration: none;
+          border-radius: 50px;
+          transition: all 0.3s ease;
+          word-break: break-word;
+      }
+      
+      .contact-link:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 20px rgba(48, 153, 117, 0.4);
+      }
+
+      /* Footer */
+      footer {
+          background: #454d66;
+          color: #efeeb4;
+          text-align: center;
+          padding: 2rem;
+      }
+      
+      /* Animations */
+      @keyframes fadeInUp {
+          from {
+              opacity: 0;
+              transform: translateY(30px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+      
+      /* Responsive */
+      @media (max-width: 768px) {
+          .nav-toggle {
+              display: flex;
+          }
+
+          nav ul {
+              position: fixed;
+              top: 100%;
+              left: 0;
+              width: 100%;
+              height: 100vh;
+              background: rgba(239, 238, 180, 0.98);
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 2rem;
+              padding-top: 3rem;
+              transform: translateX(-100%);
+              transition: transform 0.3s ease;
+          }
+
+          nav ul.active {
+              transform: translateX(0);
+          }
+
+          nav ul li {
+              font-size: 1.2rem;
+          }
+
+          .hero {
+              background-attachment: scroll;
+              padding: 6rem 1rem 3rem;
+          }
+          
+          .hero h1 {
+              font-size: 2.5rem;
+          }
+          
+          .cta-buttons {
+              flex-direction: column;
+              align-items: center;
+              gap: 1rem;
+          }
+          
+          .hero-tools {
+              padding: 1.5rem;
+          }
+          
+          .about-content {
+              grid-template-columns: 1fr;
+              text-align: center;
+          }
+          
+          .timeline::before {
+              left: 20px;
+          }
+          
+          .timeline-item {
+              width: calc(100% - 60px);
+              left: 60px !important;
+          }
+          
+          .timeline-item::before {
+              left: -60px !important;
+          }
+          
+          .contact-links {
+              flex-direction: column;
+              align-items: center;
+          }
+      }
+  </style>
+</head>
+<body>
+  <nav>
+      <div class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
+      <ul id="navMenu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#life">Life</a></li>
+          <li><a href="#contact">Contact</a></li>
+      </ul>
+  </nav>
+
+  <section id="home" class="hero">
+      <div class="hero-content">
+          <div class="hero-main">
+              <h1>Wong Wai Kuen - Oscar</h1>
+              <p>Business Analyst & Data Analytics Specialist</p>
+              <div class="cta-buttons">
+                  <a href="#about" class="cta-button">Learn More About Me</a>
+                  <a href="#contact" class="cta-button secondary">Get In Touch</a>
+              </div>
+          </div>
+          
+          <div class="hero-tools">
+              <h3>🛠️ Productivity Tools</h3>
+              <p>Explore my collection of productivity tools and utilities designed to streamline workflows and enhance efficiency.</p>
+              <a href="https://oscarwong1027.github.io/productivity-tools/" target="_blank" class="tools-link">
+                  Visit Productivity Tools →
+              </a>
+          </div>
+      </div>
+  </section>
+
+  <section id="about">
+      <h2>About Me</h2>
+      <div class="about-content">
+          <div class="profile-image">OW</div>
+          <div class="about-text">
+              <p>Hello! I'm Oscar Wong, a dedicated business analyst and data analytics specialist with a passion for leveraging data-driven insights to streamline operations and improve business strategies.</p>
+              <p>I have experience in AI-driven projects, Power BI reporting, and data analysis across various industries. I am committed to delivering solutions that enhance efficiency and user experience. Outside of work, I enjoy exploring new technologies and continuous learning.</p>
+          </div>
+      </div>
+  </section>
+
+  <section id="experience" class="experience">
+      <h2>Work Experience</h2>
+      <div class="timeline">
+          <div class="timeline-item">
+              <div class="job-title">Business Analyst – Data Analytics</div>
+              <div class="company">Adsale People Limited</div>
+              <div class="duration">Oct 2024 – Present</div>
+          </div>
+
+          <div class="timeline-item">
+              <div class="job-title">WMS Applications Analyst</div>
+              <div class="company">Ralph Lauren Asia Pacific Limited</div>
+              <div class="duration">May 2023 – Oct 2024</div>
+          </div>
+
+          <div class="timeline-item">
+              <div class="job-title">Data Analyst</div>
+              <div class="company">Kerry Freight (Hong Kong) Limited</div>
+              <div class="duration">Dec 2022 – May 2023</div>
+          </div>
+
+          <div class="timeline-item">
+              <div class="job-title">Research Assistant</div>
+              <div class="company">Hong Kong Shue Yan University</div>
+              <div class="duration">April 2021 – Dec 2022</div>
+          </div>
+      </div>
+  </section>
+
+  <section id="education" class="education">
+      <h2>Education</h2>
+      <div class="education-item">
+          <div class="degree">M.Sc. in Data Science and Business Statistics</div>
+          <div class="school">The Chinese University of Hong Kong</div>
+      </div>
+      <div class="education-item">
+          <div class="degree">B.Soc.Sc. in Psychology</div>
+          <div class="school">Hong Kong Shue Yan University</div>
+      </div>
+  </section>
+
+  <section id="certifications" class="certifications">
+      <h2>Certification & Courses</h2>
+      <ul class="cert-list">
+          <li>PL-300: Power BI Data Analyst Associate</li>
+          <li>AI-900 & AZ-900: Azure AI & Cloud Fundamentals</li>
+          <li>IBM Data Engineering Professional Certification</li>
+          <li>Google Data Analytics</li>
+          <li>Udemy: Figma UI UX Design Essentials</li>
+          <li>Udemy: The Complete Full-Stack Web Dev Bootcamp</li>
+      </ul>
+  </section>
+
+  <section id="skills">
+      <h2>Technical Proficiencies</h2>
+      <div class="skills-grid">
+          <div class="skill-card">
+              <div class="skill-icon">🐍</div>
+              <h3>Python</h3>
+          </div>
+          <div class="skill-card">
+              <div class="skill-icon">📊</div>
+              <h3>R</h3>
+          </div>
+          <div class="skill-card">
+              <div class="skill-icon">🗃️</div>
+              <h3>SQL</h3>
+          </div>
+          <div class="skill-card">
+              <div class="skill-icon">📈</div>
+              <h3>Power BI</h3>
+          </div>
+          <div class="skill-card">
+              <div class="skill-icon">📑</div>
+              <h3>Excel</h3>
+          </div>
+          <div class="skill-card">
+              <div class="skill-icon">🤖</div>
+              <h3>Dify</h3>
+          </div>
+          <div class="skill-card">
+              <div class="skill-icon">⚡</div>
+              <h3>Power Automate</h3>
+          </div>
+          <div class="skill-card">
+              <div class="skill-icon">🌐</div>
+              <h3>Google Analytics</h3>
+          </div>
+          <div class="skill-card">
+              <div class="skill-icon">🔧</div>
+              <h3>Postman</h3>
+          </div>
+          <div class="skill-card">
+              <div class="skill-icon">💻</div>
+              <h3>HTML5 / CSS3 / JavaScript</h3>
+          </div>
+          <div class="skill-card">
+              <div class="skill-icon">🎨</div>
+              <h3>Figma</h3>
+          </div>
+      </div>
+  </section>
+
+  <section id="life" class="life">
+      <h2>Life & Interests</h2>
+      <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Beyond work, I enjoy activities that inspire and keep me balanced.</p>
+      
+      <div class="hobbies-grid">
+          <div class="hobby-card">
+              <div class="hobby-icon">⛰️</div>
+              <h3>Hiking</h3>
+              <p>Exploring nature trails and mountain peaks on weekends</p>
+          </div>
+          
+          <div class="hobby-card">
+              <div class="hobby-icon">💪</div>
+              <h3>Gym</h3>
+              <p>Staying fit and healthy through regular workout sessions</p>
+          </div>
+          
+          <div class="hobby-card">
+              <div class="hobby-icon">🏸</div>
+              <h3>Badminton</h3>
+              <p>Enjoying competitive games and improving my technique</p>
+          </div>
+          
+          <div class="hobby-card">
+              <div class="hobby-icon">🎬</div>
+              <h3>Movie</h3>
+              <p>Watching films across all genres, from sci-fi to documentaries</p>
+          </div>
+      </div>
+  </section>
+
+  <section id="contact" class="contact">
+      <h2>Let's Connect</h2>
+      <p>I'm always open to discussing new opportunities, collaborations, or just having a friendly chat about technology and life.</p>
+      
+      <div class="contact-links">
+          <a href="tel:51697315" class="contact-link">Tel.: 51697315</a>
+          <a href="mailto:oscarwong1027@gmail.com" class="contact-link">Email Me</a>
+      </div>
+  </section>
+
+  <footer>
+      <p>&copy; 2025 Wong Wai Kuen - Oscar.</p>
+  </footer>
+
+  <script>
+      // Mobile Navigation Toggle
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.getElementById('navMenu');
+
+      navToggle.addEventListener('click', () => {
+          navToggle.classList.toggle('active');
+          navMenu.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+              e.preventDefault();
+              
+              // Close mobile menu
+              navToggle.classList.remove('active');
+              navMenu.classList.remove('active');
+              
+              // Smooth scroll to target
+              const target = document.querySelector(this.getAttribute('href'));
+              if (target) {
+                  target.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start'
+                  });
+              }
+          });
+      });
+
+      // Add scroll effect to navigation
+      window.addEventListener('scroll', () => {
+          const nav = document.querySelector('nav');
+          if (window.scrollY > 100) {
+              nav.style.background = 'rgba(239, 238, 180, 0.98)';
+          } else {
+              nav.style.background = 'rgba(239, 238, 180, 0.95)';
+          }
+      });
+
+      // Animate timeline items on scroll
+      const observerOptions = {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.style.opacity = '1';
+                  entry.target.style.transform = 'translateY(0)';
+              }
+          });
+      }, observerOptions);
+
+      document.querySelectorAll('.timeline-item, .skill-card, .hobby-card, .education-item, .cert-list li').forEach(item => {
+          item.style.opacity = '
