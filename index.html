@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wong Wai Kuen - Oscar | Business Analyst & Data Analytics Specialist</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%231a365d'/%3E%3Ctext x='50' y='60' font-family='Arial,sans-serif' font-size='28' font-weight='bold' text-anchor='middle' fill='%23ffffff'%3EOW%3C/text%3E%3C/svg%3E">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+      :root {
+          --primary-color: #1a365d;
+          --secondary-color: #2d3748;
+          --accent-color: #3182ce;
+          --light-accent: #63b3ed;
+          --text-primary: #2d3748;
+          --text-secondary: #4a5568;
+          --text-light: #718096;
+          --background-light: #f7fafc;
+          --background-white: #ffffff;
+          --border-color: #e2e8f0;
+          --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+          --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+          --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+      
+      body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.6;
+          color: var(--text-primary);
+          overflow-x: hidden;
+          font-weight: 400;
+      }
+      
+      /* Navigation */
+      nav {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          z-index: 1000;
+          padding: 1rem 0;
+          box-shadow: var(--shadow-sm);
+          border-bottom: 1px solid var(--border-color);
+      }
+      
+      .nav-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+      
+      .nav-logo {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--primary-color);
+          text-decoration: none;
+      }
+      
+      nav ul {
+          display: flex;
+          list-style: none;
+          gap: 2rem;
+      }
+      
+      nav a {
+          text-decoration: none;
+          color: var(--text-secondary);
+          font-weight: 500;
+          font-size: 0.95rem;
+          transition: all 0.3s ease;
+          position: relative;
+          padding: 0.5rem 0;
+      }
+      
+      nav a:hover {
+          color: var(--primary-color);
+      }
+      
+      nav a::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: 0;
+          left: 0;
+          background: var(--accent-color);
+          transition: width 0.3s ease;
+      }
+      
+      nav a:hover::after {
+          width: 100%;
+      }
+
+      /* Mobile Navigation Toggle */
+      .nav-toggle {
+          display: none;
+          flex-direction: column;
+          cursor: pointer;
+          padding: 0.5rem;
+      }
+
+      .nav-toggle span {
+          width: 24px;
+          height: 2px;
+          background: var(--text-primary);
+          margin: 3px 0;
+          transition: 0.3s;
+          border-radius: 1px;
+      }
+
+      .nav-toggle.active span:nth-child(1) {
+          transform: rotate(-45deg) translate(-5px, 6px);
+      }
+
+      .nav-toggle.active span:nth-child(2) {
+          opacity: 0;
+      }
+
+      .nav-toggle.active span:nth-child(3) {
+          transform: rotate(45deg) translate(-5px, -6px);
+      }
+      
+      /* Hero Section */
+      .hero {
+          min-height: 100vh;
+          background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          color: white;
+          position: relative;
+          padding: 8rem 2rem 4rem;
+      }
+      
+      .hero-content {
+          max-width: 1000px;
+          width: 100%;
+          animation: fadeInUp 1s ease-out;
+      }
+      
+      .hero-main {
+          margin-bottom: 4rem;
+      }
+      
+      .hero h1 {
+          font-size: 3.5rem;
+          font-weight: 700;
+          margin-bottom: 1.5rem;
+          letter-spacing: -0.02em;
+      }
+      
+      .hero-subtitle {
+          font-size: 1.5rem;
+          font-weight: 400;
+          margin-bottom: 1rem;
+          opacity: 0.9;
+          color: var(--light-accent);
+      }
+      
+      .hero-description {
+          font-size: 1.1rem;
+          margin-bottom: 3rem;
+          opacity: 0.8;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+          line-height: 1.7;
+      }
+      
+      .cta-buttons {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-bottom: 4rem;
+      }
+      
+      .cta-button {
+          display: inline-flex;
+          align-items: center;
+          padding: 1rem 2rem;
+          background: white;
+          color: var(--primary-color);
+          text-decoration: none;
+          border-radius: 8px;
+          border: 2px solid white;
+          transition: all 0.3s ease;
+          font-weight: 600;
+          font-size: 0.95rem;
+      }
+      
+      .cta-button:hover {
+          background: transparent;
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-lg);
+      }
+      
+      .cta-button.secondary {
+          background: transparent;
+          color: white;
+          border-color: rgba(255, 255, 255, 0.3);
+      }
+      
+      .cta-button.secondary:hover {
+          background: white;
+          color: var(--primary-color);
+          border-color: white;
+      }
+      
+      /* Productivity Tools Card */
+      .hero-tools {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 16px;
+          padding: 2.5rem;
+          margin-top: 2rem;
+          animation: fadeInUp 1s ease-out 0.3s both;
+      }
+      
+      .hero-tools h3 {
+          font-size: 1.4rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          color: white;
+      }
+      
+      .hero-tools p {
+          font-size: 1rem;
+          margin-bottom: 1.5rem;
+          opacity: 0.9;
+          line-height: 1.6;
+      }
+      
+      .tools-link {
+          display: inline-flex;
+          align-items: center;
+          padding: 0.75rem 1.5rem;
+          background: rgba(255, 255, 255, 0.15);
+          color: white;
+          text-decoration: none;
+          border-radius: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          transition: all 0.3s ease;
+          font-weight: 500;
+          font-size: 0.95rem;
+      }
+      
+      .tools-link:hover {
+          background: white;
+          color: var(--primary-color);
+          transform: translateY(-2px);
+      }
+      
+      /* Sections */
+      section {
+          padding: 6rem 2rem;
+      }
+      
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+      }
+      
+      h2 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          text-align: center;
+          color: var(--text-primary);
+          letter-spacing: -0.02em;
+      }
+      
+      .section-subtitle {
+          text-align: center;
+          font-size: 1.1rem;
+          color: var(--text-light);
+          margin-bottom: 4rem;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      
+      /* About Section */
+      .about {
+          background: var(--background-light);
+      }
+      
+      .about-content {
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+          gap: 4rem;
+          align-items: center;
+      }
+      
+      .profile-image {
+          width: 280px;
+          height: 280px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 3.5rem;
+          color: white;
+          margin: 0 auto;
+          box-shadow: var(--shadow-xl);
+          font-weight: 700;
+      }
+      
+      .about-text {
+          font-size: 1.1rem;
+          color: var(--text-secondary);
+          line-height: 1.8;
+      }
+      
+      .about-text p {
+          margin-bottom: 1.5rem;
+      }
+      
+      /* Experience Section */
+      .experience {
+          background: white;
+      }
+      
+      .timeline {
+          position: relative;
+          max-width: 900px;
+          margin: 0 auto;
+      }
+      
+      .timeline::before {
+          content: '';
+          position: absolute;
+          left: 50%;
+          top: 0;
+          bottom: 0;
+          width: 2px;
+          background: var(--border-color);
+          transform: translateX(-50%);
+      }
+      
+      .timeline-item {
+          position: relative;
+          margin: 3rem 0;
+          padding: 2.5rem;
+          background: white;
+          border-radius: 12px;
+          box-shadow: var(--shadow-md);
+          width: 45%;
+          border: 1px solid var(--border-color);
+      }
+      
+      .timeline-item:nth-child(odd) {
+          left: 0;
+      }
+      
+      .timeline-item:nth-child(even) {
+          left: 55%;
+      }
+      
+      .timeline-item::before {
+          content: '';
+          position: absolute;
+          top: 30px;
+          width: 16px;
+          height: 16px;
+          background: var(--accent-color);
+          border-radius: 50%;
+          border: 4px solid white;
+          box-shadow: 0 0 0 4px var(--accent-color);
+      }
+      
+      .timeline-item:nth-child(odd)::before {
+          right: -58px;
+      }
+      
+      .timeline-item:nth-child(even)::before {
+          left: -58px;
+      }
+      
+      .job-title {
+          font-size: 1.3rem;
+          font-weight: 600;
+          color: var(--text-primary);
+          margin-bottom: 0.5rem;
+      }
+      
+      .company {
+          color: var(--accent-color);
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+          font-size: 1.1rem;
+      }
+      
+      .duration {
+          color: var(--text-light);
+          font-size: 0.9rem;
+          margin-bottom: 1rem;
+          font-weight: 500;
+      }
+
+      /* Education & Certifications */
+      .education, .certifications {
+          background: var(--background-light);
+      }
+      
+      .education-grid, .cert-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          gap: 2rem;
+          margin-top: 2rem;
+      }
+      
+      .education-card, .cert-card {
+          background: white;
+          padding: 2.5rem;
+          border-radius: 12px;
+          box-shadow: var(--shadow-md);
+          border: 1px solid var(--border-color);
+      }
+      
+      .degree, .cert-title {
+          font-weight: 600;
+          font-size: 1.2rem;
+          color: var(--text-primary);
+          margin-bottom: 0.5rem;
+      }
+      
+      .school, .cert-issuer {
+          color: var(--accent-color);
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+      }
+      
+      .cert-list {
+          list-style: none;
+          padding: 0;
+      }
+      
+      .cert-list li {
+          padding: 0.75rem 0;
+          border-bottom: 1px solid var(--border-color);
+          color: var(--text-secondary);
+          font-weight: 500;
+      }
+      
+      .cert-list li:last-child {
+          border-bottom: none;
+      }
+      
+      .cert-list li::before {
+          content: '✓';
+          color: var(--accent-color);
+          font-weight: bold;
+          margin-right: 0.75rem;
+      }
+
+      /* Skills Section */
+      .skills {
+          background: white;
+      }
+      
+      .skills-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 1.5rem;
+          margin-top: 3rem;
+      }
+
+      .skill-card {
+          background: white;
+          padding: 2rem;
+          border-radius: 12px;
+          box-shadow: var(--shadow-sm);
+          border: 1px solid var(--border-color);
+          text-align: center;
+          transition: all 0.3s ease;
+      }
+
+      .skill-card:hover {
+          transform: translateY(-4px);
+          box-shadow: var(--shadow-lg);
+          border-color: var(--accent-color);
+      }
+
+      .skill-icon {
+          font-size: 2.5rem;
+          margin-bottom: 1rem;
+          color: var(--accent-color);
+      }
+      
+      .skill-card h3 {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--text-primary);
+      }
+
+      /* Life Section */
+      .life {
+          background: var(--background-light);
+      }
+      
+      .hobbies-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+          margin-top: 3rem;
+      }
+      
+      .hobby-card {
+          background: white;
+          padding: 2.5rem;
+          border-radius: 12px;
+          text-align: center;
+          box-shadow: var(--shadow-md);
+          border: 1px solid var(--border-color);
+          transition: all 0.3s ease;
+      }
+      
+      .hobby-card:hover {
+          transform: translateY(-4px);
+          box-shadow: var(--shadow-lg);
+      }
+      
+      .hobby-icon {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+          color: var(--accent-color);
+      }
+      
+      .hobby-card h3 {
+          font-size: 1.2rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          color: var(--text-primary);
+      }
+      
+      .hobby-card p {
+          color: var(--text-secondary);
+          font-size: 0.95rem;
+      }
+      
+      /* Contact Section */
+      .contact {
+          background: white;
+          text-align: center;
+      }
+      
+      .contact-links {
+          display: flex;
+          justify-content: center;
+          gap: 1.5rem;
+          margin-top: 3rem;
+          flex-wrap: wrap;
+      }
+      
+      .contact-link {
+          display: inline-flex;
+          align-items: center;
+          padding: 1rem 2rem;
+          background: var(--primary-color);
+          color: white;
+          text-decoration: none;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+          font-weight: 500;
+      }
+      
+      .contact-link:hover {
+          background: var(--secondary-color);
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-lg);
+      }
+
+      /* Footer */
+      footer {
+          background: var(--primary-color);
+          color: white;
+          text-align: center;
+          padding: 2rem;
+          font-size: 0.9rem;
+      }
+      
+      /* Animations */
+      @keyframes fadeInUp {
+          from {
+              opacity: 0;
+              transform: translateY(30px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+      
+      /* Responsive Design */
+      @media (max-width: 768px) {
+          .nav-toggle {
+              display: flex;
+          }
+          
+          .nav-container {
+              padding: 0 1rem;
+          }
+
+          nav ul {
+              position: fixed;
+              top: 100%;
+              left: 0;
+              width: 100%;
+              height: 100vh;
+              background: rgba(255, 255, 255, 0.98);
+              backdrop-filter: blur(20px);
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 2rem;
+              padding-top: 3rem;
+              transform: translateX(-100%);
+              transition: transform 0.3s ease;
+          }
+
+          nav ul.active {
+              transform: translateX(0);
+          }
+
+          .hero {
+              padding: 6rem 1rem 3rem;
+          }
+          
+          .hero h1 {
+              font-size: 2.5rem;
+          }
+          
+          .hero-subtitle {
+              font-size: 1.2rem;
+          }
+          
+          .cta-buttons {
+              flex-direction: column;
+              align-items: center;
+          }
+          
+          .about-content {
+              grid-template-columns: 1fr;
+              text-align: center;
+              gap: 3rem;
+          }
+          
+          .timeline::before {
+              left: 20px;
+          }
+          
+          .timeline-item {
+              width: calc(100% - 60px);
+              left: 60px !important;
+          }
+          
+          .timeline-item::before {
+              left: -58px !important;
+          }
+          
+          .education-grid {
+              grid-template-columns: 1fr;
+          }
+          
+          .contact-links {
+              flex-direction: column;
+              align-items: center;
+          }
+          
+          section {
+              padding: 4rem 1rem;
+          }
+      }
+  </style>
+</head>
+<body>
+  <nav>
+      <div class="nav-container">
+          <a href="#home" class="nav-logo">Oscar Wong</a>
+          <div class="nav-toggle" id="navToggle">
+              <span></span>
+              <span></span>
+              <span></span>
+          </div>
+          <ul id="navMenu">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#experience">Experience</a></li>
+              <li><a href="#education">Education</a></li>
+              <li><a href="#certifications">Certifications</a></li>
+              <li><a href="#skills">Skills</a></li>
+              <li><a href="#life">Interests</a></li>
+              <li><a href="#contact">Contact</a></li>
+          </ul>
+      </div>
+  </nav>
+
+  <section id="home" class="hero">
+      <div class="hero-content">
+          <div class="hero-main">
+              <h1>Wong Wai Kuen</h1>
+              <div class="hero-subtitle">Business Analyst & Data Analytics Specialist</div>
+              <p class="hero-description">Leveraging data-driven insights to streamline operations, enhance business strategies, and deliver innovative solutions across diverse industries.</p>
+              <div class="cta-buttons">
+                  <a href="#about" class="cta-button">Learn More</a>
+                  <a href="#contact" class="cta-button secondary">Get In Touch</a>
+              </div>
+          </div>
+          
+          <div class="hero-tools">
+              <h3>🛠️ Productivity Tools</h3>
+              <p>Explore my collection of productivity tools and utilities designed to streamline workflows and enhance operational efficiency.</p>
+              <a href="https://oscarwong1027.github.io/productivity-tools/" target="_blank" class="tools-link">
+                  Visit Tools Collection →
+              </a>
+          </div>
+      </div>
+  </section>
+
+  <section id="about" class="about">
+      <div class="container">
+          <h2>About Me</h2>
+          <p class="section-subtitle">Dedicated to transforming data into actionable business insights</p>
+          <div class="about-content">
+              <div class="profile-image">OW</div>
+              <div class="about-text">
+                  <p>I'm Oscar Wong, a results-driven business analyst and data analytics specialist with extensive experience in leveraging advanced analytics to drive strategic decision-making and operational excellence.</p>
+                  <p>My expertise spans AI-driven project implementation, comprehensive Power BI reporting solutions, and cross-industry data analysis. I am committed to delivering innovative solutions that enhance organizational efficiency, optimize user experiences, and create measurable business value.</p>
+                  <p>Beyond my professional endeavors, I maintain a passion for emerging technologies and continuous learning, ensuring I stay at the forefront of industry developments and best practices.</p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section id="experience" class="experience">
+      <div class="container">
+          <h2>Professional Experience</h2>
+          <p class="section-subtitle">A track record of delivering data-driven solutions across diverse industries</p>
+          <div class="timeline">
+              <div class="timeline-item">
+                  <div class="job-title">Business Analyst – Data Analytics</div>
+                  <div class="company">Adsale People Limited</div>
+                  <div class="duration">October 2024 – Present</div>
+              </div>
+
+              <div class="timeline-item">
+                  <div class="job-title">WMS Applications Analyst</div>
+                  <div class="company">Ralph Lauren Asia Pacific Limited</div>
+                  <div class="duration">May 2023 – October 2024</div>
+              </div>
+
+              <div class="timeline-item">
+                  <div class="job-title">Data Analyst</div>
+                  <div class="company">Kerry Freight (Hong Kong) Limited</div>
+                  <div class="duration">December 2022 – May 2023</div>
+              </div>
+
+              <div class="timeline-item">
+                  <div class="job-title">Research Assistant</div>
+                  <div class="company">Hong Kong Shue Yan University</div>
+                  <div class="duration">April 2021 – December 2022</div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section id="education" class="education">
+      <div class="container">
+          <h2>Education</h2>
+          <p class="section-subtitle">Strong academic foundation in data science and behavioral analysis</p>
+          <div class="education-grid">
+              <div class="education-card">
+                  <div class="degree">Master of Science in Data Science and Business Statistics</div>
+                  <div class="school">The Chinese University of Hong Kong</div>
+              </div>
+              <div class="education-card">
+                  <div class="degree">Bachelor of Social Science in Psychology</div>
+                  <div class="school">Hong Kong Shue Yan University</div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section id="certifications" class="certifications">
+      <div class="container">
+          <h2>Certifications & Professional Development</h2>
+          <p class="section-subtitle">Continuous learning and industry-recognized credentials</p>
+          <div class="cert-card">
+              <ul class="cert-list">
+                  <li>PL-300: Microsoft Power BI Data Analyst Associate</li>
+                  <li>AI-900 & AZ-900: Azure AI & Cloud Fundamentals</li>
+                  <li>IBM Data Engineering Professional Certification</li>
+                  <li>Google Data Analytics Professional Certificate</li>
+                  <li>Figma UI/UX Design Essentials</li>
+                  <li>Full-Stack Web Development Bootcamp</li>
+              </ul>
+          </div>
+      </div>
+  </section>
+
+  <section id="skills" class="skills">
+      <div class="container">
+          <h2>Technical Proficiencies</h2>
+          <p class="section-subtitle">Comprehensive toolkit for modern data analytics and business intelligence</p>
+          <div class="skills-grid">
+              <div class="skill-card">
+                  <div class="skill-icon">🐍</div>
+                  <h3>Python</h3>
+              </div>
+              <div class="skill-card">
+                  <div class="skill-icon">📊</div>
+                  <h3>R</h3>
+              </div>
+              <div class="skill-card">
+                  <div class="skill-icon">🗃️</div>
+                  <h3>SQL</h3>
+              </div>
+              <div class="skill-card">
+                  <div class="skill-icon">📈</div>
+                  <h3>Power BI</h3>
+              </div>
+              <div class="skill-card">
+                  <div class="skill-icon">📑</div>
+                  <h3>Excel</h3>
+              </div>
+              <div class="skill-card">
+                  <div class="skill-icon">🤖</div>
+                  <h3>Dify</h3>
+              </div>
+              <div class="skill-card">
+                  <div class="skill-icon">⚡</div>
+                  <h3>Power Automate</h3>
+              </div>
+              <div class="skill-card">
+                  <div class="skill-icon">🌐</div>
+                  <h3>Google Analytics</h3>
+              </div>
+              <div class="skill-card">
+                  <div class="skill-icon">🔧</div>
+                  <h3>Postman</h3>
+              </div>
+              <div class="skill-card">
+                  <div class="skill-icon">💻</div>
+                  <h3>Web Development</h3>
+              </div>
+              <div class="skill-card">
+                  <div class="skill-icon">🎨</div>
+                  <h3>Figma</h3>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section id="life" class="life">
+      <div class="container">
+          <h2>Personal Interests</h2>
+          <p class="section-subtitle">Maintaining balance through diverse activities and continuous growth</p>
+          
+          <div class="hobbies-grid">
+              <div class="hobby-card">
+                  <div class="hobby-icon">⛰️</div>
+                  <h3>Hiking</h3>
+                  <p>Exploring nature trails and mountain peaks for physical and mental wellness</p>
+              </div>
+              
+              <div class="hobby-card">
+                  <div class="hobby-icon">💪</div>
+                  <h3>Fitness</h3>
+                  <p>Maintaining physical health through regular strength training and conditioning</p>
+              </div>
